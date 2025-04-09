@@ -1,0 +1,124 @@
+
+:root {
+	--p1-color: #ff0000;
+	--p2-color: #ffff00;
+	--active-color: magenta;
+	--active-color-rotation: 300deg;
+	--semi-transparent-bg: rgba(0, 40, 255, 0.3);
+	--border-size: .2em;
+}
+
+body {
+	font-size: 2rem;
+	margin: 0;
+	padding-top: .5em;
+	min-height: 100vh;
+	min-width: 100vw;
+	text-align: center;
+	background-image: linear-gradient(
+    0deg,
+    hsl(0deg 0% 0%) 0%,
+    hsl(0deg 0% 0%) 3%,
+    hsl(0deg 0% 0%) 7%,
+    hsl(0deg 5% 13%) 12%,
+    hsl(0deg 11% 25%) 18%,
+    hsl(17deg 8% 43%) 26%,
+    hsl(34deg 8% 62%) 37%,
+    hsl(42deg 23% 76%) 54%,
+    hsl(50deg 84% 90%) 100%
+  );
+	font-family: "New Amsterdam", sans-serif;
+  font-style: normal;
+}
+
+*:focus {
+	outline: .25em var(--active-color) solid;
+}
+
+.title {
+	font-family: 'Roboto Condensed', sans-serif;
+	display: flex;
+	line-height: 1.4em;
+	width: fit-content;
+	font-size: 2em;
+	font-weight: 700;
+	background-color: black;
+	color: white;
+	margin: 0 auto .5em;
+	border-radius: 2em 0 0 2em;
+	padding: 0 .15em 0 .35em;
+	outline: .1em solid white;
+	outline-offset: -.2em;
+	border-right: .1em solid black;
+}
+.title span {
+	color: red;
+	font-size: 1.2em;
+	scale: 1.4;
+	/* text-shadow: 2px 0 black, 3px 0 white; */
+	font-family: "Helvetica", sans-serif;
+}
+@media only screen and (max-width: 700px) {
+	.title {
+		font-size: 1.5em;
+	}
+}
+@media only screen and (max-width: 500px) {
+	.title {
+		font-size: 1.2em;
+	}
+}
+
+.column {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+a {
+	display: block;
+	width: fit-content;
+	margin: auto;
+	min-width: 3em;
+	color: blue;
+}
+
+a, input, button {
+	cursor: pointer;
+	transition: all .3s ease-in-out;
+	background-color: white;
+	padding: .1em;
+	text-decoration: none;
+}
+
+a, button {
+	border: var(--border-size) solid black;
+}
+
+a:hover, input:hover, button:hover {
+	scale: 1.05;
+	box-shadow: .1em .1em #8888888f
+}
+
+a:active, button:active {
+	color: var(--active-color);
+}
+
+button:active img {
+	filter: invert(23%) sepia(100%) saturate(5000%) hue-rotate(var(--active-color-rotation));
+}
+
+input:active {
+	background-color: transparent;
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
