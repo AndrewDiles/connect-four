@@ -18,8 +18,9 @@ const SelectPlayMode = ({ setGame }) => {
 
   return (
     <Container $secret={secret}>
-			<BackButton setGame={setGame}/>
+      <BackButton setGame={setGame} />
       <ModeSelectionButton
+        className="plastic-background"
         type="button"
         $secret={secret}
         onClick={() => {
@@ -35,26 +36,36 @@ const SelectPlayMode = ({ setGame }) => {
         <DiagonalVersus />
       </ModeSelectionButton>
 
-      <ModeSelectionButton type="button" $secret={secret} onClick={() => {
+      <ModeSelectionButton
+        className="bamboo-background"
+        type="button"
+        $secret={secret}
+        onClick={() => {
           startGame(setGame, {
             status: "on",
             player1: "human",
             player2: "bot",
           });
-        }}>
+        }}
+      >
         <img src={human} alt="human player" />{" "}
         <img src={bot} alt="computer player" />
         <DiagonalVersus />
       </ModeSelectionButton>
 
       {secret && (
-        <ModeSelectionButton type="button" $secret={secret} onClick={() => {
-          startGame(setGame, {
-            status: "on",
-            player1: "bot",
-            player2: "bot",
-          });
-        }}>
+        <ModeSelectionButton
+          className="circuit-board-background"
+          type="button"
+          $secret={secret}
+          onClick={() => {
+            startGame(setGame, {
+              status: "on",
+              player1: "bot",
+              player2: "bot",
+            });
+          }}
+        >
           <img src={bot} alt="computer player" />{" "}
           <img src={bot} alt="computer player" /> <DiagonalVersus />
         </ModeSelectionButton>
@@ -145,9 +156,9 @@ const ModeSelectionButton = styled.button`
     right: 0;
     transform-origin: bottom right;
   }
-	&:active span::after {
-		-webkit-text-stroke: var(--border-size) var(--active-color);
-	}
+  &:active span::after {
+    -webkit-text-stroke: var(--border-size) var(--active-color);
+  }
 `;
 
 const HiddenLabel = styled.label`
@@ -172,11 +183,12 @@ const HiddenLabel = styled.label`
 
 const DiagonalVersus = styled.span`
   position: absolute;
-  top: -53%;
+  top: -55%;
   left: 50%;
   transform: rotate(45deg);
   width: 0.6em;
-  background-color: red;
+  background-color: yellow;
+	border: .2em solid red;
   height: 200%;
   &::after {
     z-index: 5;

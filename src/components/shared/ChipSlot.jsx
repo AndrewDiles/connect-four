@@ -7,12 +7,12 @@ export default ChipSlot
 const Chip = styled.div`
   height: 30px;
   width: 30px;
-  background: ${({$player})=> $player === 1 ? "var(--p1-color)" : $player === 2 ? "var(--p2-color)" : "repeating-linear-gradient( -45deg, cornsilk, cornsilk 5px, lightgray 5px, lightgray 10px )"};
+  background: ${({$player})=> $player === 1 ? "var(--p1-color)" : $player === 2 ? "var(--p2-color)" : "cornsilk"};
   border-radius: 50%;
 	border: 2px solid black;
 	margin: 5px -5px;
 	position: relative;
-	opacity: ${({$faded})=>$faded && ".75"};
+	opacity: ${({$faded})=>$faded && ".65"};
 	filter: ${({$faded})=>$faded && "hue-rotate(5deg)"};
 	&::after {
 		content: "";
