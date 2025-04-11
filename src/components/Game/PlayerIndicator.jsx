@@ -7,34 +7,30 @@ const PlayerIndicator = ({
   activePlayerIsABot,
   result,
 }) => {
-  if (paused) {
-    return <StatusMessage className="row">CHECKING HISTORY</StatusMessage>;
-  }
-  if (result === 3) {
-    return <StatusMessage className="row">DRAW</StatusMessage>;
-  }
-  if (result > 0) {
-    return (
-      <StatusMessage className="row">
-        <ChipSlot player={result} />
-        PLAYER {result} WINS!
-      </StatusMessage>
-    );
-  }
-
-  if (activePlayerIsABot) {
-    return (
-      <StatusMessage className="row">
-        <ChipSlot player={activePlayer} />
-        BOT'S TURN
-      </StatusMessage>
-    );
-  }
-
   return (
-    <StatusMessage className="row">
-      <ChipSlot player={activePlayer} />
-      PLAYER {activePlayer === 1 ? "ONE'S" : "TWO'S"} TURN
+    <StatusMessage id="indicator" className="row">
+      {paused ? (
+        "CHECKING HISTORY"
+      ) : result === 3 ? (
+        "DRAW"
+      ) : result > 0 ? (
+        <>
+          {" "}
+          <ChipSlot player={result} />
+          PLAYER {result} WINS!
+        </>
+      ) : activePlayerIsABot ? (
+        <>
+          <ChipSlot player={activePlayer} />
+          BOT'S TURN
+        </>
+      ) : (
+        <>
+          {" "}
+          <ChipSlot player={activePlayer} />
+          PLAYER {activePlayer === 1 ? "ONE'S" : "TWO'S"} TURN
+        </>
+      )}
     </StatusMessage>
   );
 };
@@ -46,7 +42,7 @@ const StatusMessage = styled.div`
   & div {
     margin-right: 10px;
   }
-	@media only screen and (orientation: landscape) and (max-height: 500px) {
+  @media only screen and (orientation: landscape) and (max-height: 500px) {
     & {
       margin-top: 0;
     }

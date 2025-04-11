@@ -32,7 +32,7 @@ const Board = ({
 
 export default Board;
 
-const Container = styled.section`
+const Container = styled.main`
   transform-origin: top;
   transform: scale(${({ $scale }) => $scale || 1});
   position: relative;

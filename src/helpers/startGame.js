@@ -5,6 +5,7 @@ const startGame = (setter, gameContent) => {
 		return {
 			...current,
 			...gameContent,
+			revisingHistory: false,
 			boardIndex: 0,
       boards: [generateInitialBoard()],
 		}

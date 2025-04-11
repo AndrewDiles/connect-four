@@ -5,10 +5,10 @@ import { keyframes } from 'styled-components';
 
 const bounceAnimation = keyframes`
  0% { top: 0; transform: scaleY(1); }
- 30% { top: -30px; transform: scaleY(1); }
- 32.5% { top: -30px; transform: scaleY(1.1); }
+ 30% { top: -30px; transform: scaleY(1.05); }
+ 32.5% { top: -30px; transform: scaleY(1.2); }
  62.5% { top:0px; transform: scaleY(1); }
- 65% { top:0px; transform: scaleY(0.8); }
+ 65% { top:0px; transform: scaleY(0.9); }
  70% { top:-1px; transform: scaleY(1.1); }
  80% { top:-10px; transform: scaleY(1); }
  90% { top:0px; transform: scaleY(1); }
@@ -21,6 +21,8 @@ const bounceAnimation = keyframes`
  99% { top:0px; transform: scaleY(1); }
  100% { top:0px; transform: scaleY(1); }
 `
+
+const ANIMATION_TIME = 1250;
 
 const root = document.querySelector(":root");
 
@@ -43,7 +45,7 @@ const SingleChipSelector = ({ playerNumber }) => {
 		if (booped) {
 			timer = setTimeout(()=>{
 				setBooped(false)
-			}, 1000)
+			}, ANIMATION_TIME)
 		}
 		return () => {
 			clearTimeout(booped)
@@ -57,13 +59,11 @@ const SingleChipSelector = ({ playerNumber }) => {
 		if (!booped) setBooped(true);
 	}
 
-	const chipSlotStyle = { animationIterationCount: booped ? "infinite" : 0};
-
   return (
     <Container key={playerNumber} className="column" $booped={booped}>
       <label htmlFor={name}>PLAYER {playerNumber}</label>
       <div className="row" >
-        <ChipSlot player={playerNumber} style={chipSlotStyle}/>
+        <ChipSlot player={playerNumber}/>
         <input
           name={name}
 					onClick={boopIt}
@@ -91,6 +91,9 @@ justify-self: center;
 	min-width: 50px;
 }
 & >div >div {
-	animation: ${bounceAnimation};
+	animation-name: ${({$booped}) => $booped ? bounceAnimation : "none"};
+	animation-duration: ${ANIMATION_TIME}ms;
+	animation-iteration-count: infinite;
+	transform-origin: center;
 }
 `

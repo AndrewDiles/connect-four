@@ -44,6 +44,10 @@ body::after {
   width: 120vw;
 }
 
+menu {
+	padding-left: 0;
+}
+
 *:focus {
 	outline: .25em var(--active-color) solid;
 }

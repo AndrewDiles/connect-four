@@ -23,7 +23,7 @@ function App() {
       <Header gameOn={game.status === "on"} />
 
       {game.status === "off" && (
-        <>
+        <menu>
           <SelectChipColors />
           <BeginGameButton setGame={setGame} />
           <a
@@ -32,7 +32,7 @@ function App() {
           >
             RULES
           </a>
-        </>
+        </menu>
       )}
 
       {game.status === "select-mode" && <SelectPlayMode setGame={setGame} />}

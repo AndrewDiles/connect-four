@@ -24,7 +24,7 @@ const Column = ({
   return (
     <Container
 			className={!entireBoardDisabled && !disabled && !columnArray[0] && "selectable-column"}
-      disabled={disabled || columnArray[0]}
+      disabled={entireBoardDisabled || disabled || columnArray[0]}
       tabIndex={entireBoardDisabled ? -1 : disabled ? -1 : 0}
       onClick={(ev) => {
 				document.activeElement?.blur && document.activeElement.blur()
@@ -85,9 +85,9 @@ const Container = styled.button`
     z-index: 5;
     content: "⬇";
     position: absolute;
-    font-size: 30px;
-    top: -15%;
-    left: -7%;
+    font-size: 20px;
+    top: -9%;
+    left: 11%;
     color: white;
     font-weight: bold;
     letter-spacing: calc(var(--border-size) * 0.5);
