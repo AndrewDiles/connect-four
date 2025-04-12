@@ -56,7 +56,7 @@ const Game = ({ game, setGame }) => {
   return (
     <>
       {game.boards.length > 1 && <History game={game} setGame={setGame} />}
-      <ExitAndRestartButtons setGame={setGame} gameOver={result>0}/>
+      <ExitAndRestartButtons revisingHistory={game.revisingHistory} setGame={setGame} gameOver={result>0}/>
       <PlayerIndicator
         activePlayer={game.activePlayer}
         result={result}

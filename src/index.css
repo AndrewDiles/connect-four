@@ -116,6 +116,10 @@ menu {
 	align-items: center;
 }
 
+.reverse {
+	flex-direction: row-reverse;
+}
+
 a {
 	display: block;
 	width: fit-content;
@@ -136,16 +140,20 @@ a, button {
 	border: var(--border-size) solid black;
 }
 
-a:hover, input:hover, button:hover {
+a:hover:not(:disabled), input:hover:not(:disabled), button:hover:not(:disabled) {
 	scale: 1.05;
-	box-shadow: .1em .1em #8888888f
+	box-shadow: .1em .1em #8888888f;
+}
+button.selectable-column:hover {
+	scale: 1;
+	box-shadow: none;
 }
 
 a:active, button:active {
 	color: var(--active-color);
 }
 
-button:active img {
+button:active:not(:disabled) img {
 	filter: invert(23%) sepia(100%) saturate(5000%) hue-rotate(var(--active-color-rotation));
 }
 
@@ -155,4 +163,8 @@ input:active {
 
 button:disabled {
 	cursor: not-allowed;
+}
+
+.fadedIfDisabled:disabled {
+	opacity: 0.5;
 }

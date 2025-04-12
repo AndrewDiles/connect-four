@@ -10,8 +10,14 @@ const History = ({ game, setGame }) => {
   const [showHourGlass, setShowHourGlass] = useState(false);
   const [width, setWidth] = useState(0);
 
-	console.log(game);
-	
+	useEffect(()=>{
+		if (game.revisingHistory && width === 0) {
+			setWidth(1);
+		} else if (!game.revisingHistory && width === 1) {
+			setWidth(0);
+		}
+
+	},[game.revisingHistory])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -25,8 +31,8 @@ const History = ({ game, setGame }) => {
   return (
     <HistoryContainer className="row">
       <button
+        type="button"
         onClick={() => {
-          setWidth(game.revisingHistory ? 0 : 1);
           setGame((currentGame) => {
             return {
               ...currentGame,
@@ -45,13 +51,14 @@ const History = ({ game, setGame }) => {
 
       <ExpandingStepsContainer $width={width}>
         <button
-					disabled={game.boardIndex === 0}
+          type="button"
+          disabled={game.boardIndex === 0}
           onClick={() => {
             setGame((currentGame) => {
               return {
                 ...currentGame,
                 boardIndex: game.boardIndex - 1,
-								activePlayer : game.activePlayer === 1 ? 2 : 1
+                activePlayer: game.activePlayer === 1 ? 2 : 1,
               };
             });
           }}
@@ -60,13 +67,14 @@ const History = ({ game, setGame }) => {
         </button>
 
         <button
-					disabled={game.boardIndex >= game.boards.length -1}
+          type="button"
+          disabled={game.boardIndex >= game.boards.length - 1}
           onClick={() => {
             setGame((currentGame) => {
               return {
                 ...currentGame,
                 boardIndex: game.boardIndex + 1,
-								activePlayer : game.activePlayer === 1 ? 2 : 1
+                activePlayer: game.activePlayer === 1 ? 2 : 1,
               };
             });
           }}

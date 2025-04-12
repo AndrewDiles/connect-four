@@ -8,14 +8,14 @@ The user will be able to:
 - ✅ play against another player (hot-seat)
 - ✅ play against a bot
 - ✅ watch two bots play (this mode is hidden)
-- navigate through the history of moves
+- ✅ navigate through the history of moves
 - ✅ select chip colors
 
 ## Stretch Goals
 
 - include sound effect / volume control
 - ✅ landscape responsive design for mobile
-- easy keyboard navigation
+- ✅ easy keyboard navigation (during game)
 - bot difficulty 
 
 <br/>

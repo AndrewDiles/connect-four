@@ -5,8 +5,6 @@ const dropAChip = (board, playerNumber, targetIndex) => {
 }
 export default dropAChip
 
-// for testing, comment out the export and run through node
-
 // const board1 = [
 // 	[0,0,0,0,0,0],
 // 	[0,0,0,0,0,0],

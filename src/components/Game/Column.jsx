@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChipSlot from "../shared/ChipSlot";
+import is_touch_device4 from "../../helpers/isTouchDevice";
+
+const isTouch = is_touch_device4();
 
 const Column = ({
   columnArray,
@@ -93,6 +96,7 @@ const Container = styled.button`
     letter-spacing: calc(var(--border-size) * 0.5);
     -webkit-text-stroke: var(--border-size) black;
     paint-order: stroke fill;
+		visibility: ${isTouch && "hidden"};
   }
   &:focus:active::before {
     -webkit-text-stroke: var(--border-size) var(--active-color);
