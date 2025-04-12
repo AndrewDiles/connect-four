@@ -11,7 +11,7 @@ const SelectPlayMode = ({ setGame }) => {
   const [secretText, setSecretText] = useState("");
 
   useEffect(() => {
-    if (secretText.toLowerCase() === "unlock bots") {
+    if (secretText.toLowerCase().includes("unlock bots")) {
       setSecret(true);
     }
   }, [secretText]);
