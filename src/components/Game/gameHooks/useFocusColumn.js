@@ -17,10 +17,12 @@ const useFocusColumn = ({ result, isBotTurn, game }) => {
       if (selectableColumns.length > 0) {
         let indexOfColumnInFocus = null;
         selectableColumns.forEach((column, index) => {
-          if (document.activeElement === column) {
+          if (document?.activeElement?.id === column.id) {
             indexOfColumnInFocus = index;
           }
         });
+				console.log({indexOfColumnInFocus});
+				
         if (code === "KeyA" || code === "ArrowLeft") {
           if (typeof indexOfColumnInFocus !== "number") {
             focusRandomElementFromList(selectableColumns);
@@ -54,15 +56,14 @@ const useFocusColumn = ({ result, isBotTurn, game }) => {
     if (!result && !isBotTurn && !game.revisingHistory) {
       const selectableColumns = document.querySelectorAll(".selectable-column");
       if (selectableColumns.length > 0) {
+				console.log(document.activeElement)
         if (document.activeElement) {
           let oneInFocusAlready = false;
           selectableColumns.forEach((column) => {
-            if (document.activeElement === column) {
+            if (document.activeElement.id === column.id) {
               oneInFocusAlready = true;
             }
           });
-					// console.log(oneInFocusAlready);
-					
           if (oneInFocusAlready) return;
         }
         focusRandomElementFromList(selectableColumns);

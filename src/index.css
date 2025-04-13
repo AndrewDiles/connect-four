@@ -172,8 +172,9 @@ button:disabled {
 /* https://stackoverflow.com/questions/68216941/how-to-make-a-css-shimmer-effect-on-image */
 
 .shimmer {
-  mask: linear-gradient(45deg, #000 30%, #0009, #000 70%) right/350% 100%;
-  animation: shimmer 1.5s infinite;
+  mask: linear-gradient(45deg, #000 40%, #0005, #000 60%) right/500% 100%;
+  animation: shimmer 1.25s infinite;
+	border-color: white !important;
 }
 
 @keyframes shimmer {

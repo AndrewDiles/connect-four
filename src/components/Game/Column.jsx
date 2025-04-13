@@ -28,11 +28,12 @@ const Column = ({
   }
   return (
     <Container
+			id={`column-${columnIndex}`}
 			className={!entireBoardDisabled && !disabled && !columnArray[0] && "selectable-column"}
       disabled={entireBoardDisabled || disabled || columnArray[0]}
       tabIndex={entireBoardDisabled ? -1 : disabled ? -1 : 0}
       onClick={(ev) => {
-				document.activeElement?.blur && document.activeElement.blur()
+				// document.activeElement?.blur && document.activeElement.blur()
         if (!entireBoardDisabled) onClick();
       }}
       onMouseEnter={() => {
