@@ -1,12 +1,7 @@
 import calculateResult from "./calculateResult";
 import dropAChip from "./dropAChip";
 
-const calculateNextMove = (currentBoard, botPlayerNumber) => {
-	const possibleMoves = [];
-	for (let columnNumber = 0; columnNumber < 7; columnNumber++) {
-		if (!currentBoard[columnNumber][0]) possibleMoves.push(columnNumber)
-	}
-
+const calculateImperativeMove = (currentBoard, botPlayerNumber, possibleMoves) => {
 	let moveToMake = null;
 
 	// if bot can win, win
@@ -28,7 +23,9 @@ const calculateNextMove = (currentBoard, botPlayerNumber) => {
 	})
 
 	if (typeof moveToMake === "number") return moveToMake
+}
 
+const makeWeakPlay = (currentBoard, possibleMoves) => {
 	// if under 3 moves, play within middle
 
 	let chipsInBottomTwoRows = 0;
@@ -44,6 +41,19 @@ const calculateNextMove = (currentBoard, botPlayerNumber) => {
 	}
 
 	return possibleMoves[Math.floor(Math.random()*possibleMoves.length)]
+}
+
+const calculateNextMove = (currentBoard, botPlayerNumber) => {
+	const possibleMoves = [];
+	for (let columnNumber = 0; columnNumber < 7; columnNumber++) {
+		if (!currentBoard[columnNumber][0]) possibleMoves.push(columnNumber)
+	}
+
+	let moveToMake = calculateImperativeMove(currentBoard, botPlayerNumber, possibleMoves);
+
+	if (typeof moveToMake === "number") return moveToMake
+
+	return makeWeakPlay(currentBoard, possibleMoves)
 }
 
 export default calculateNextMove

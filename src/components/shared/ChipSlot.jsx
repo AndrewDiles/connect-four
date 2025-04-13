@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-const ChipSlot = ({ player, faded, style }) => (
-  <Chip $player={player} $faded={faded} style={style ? style : {}} />
+const ChipSlot = ({ player, faded, winner }) => (
+  <Chip $player={player} $faded={faded} className={winner && "shimmer"} />
 );
 
 export default ChipSlot;
@@ -9,7 +9,7 @@ export default ChipSlot;
 const Chip = styled.div`
   height: 30px;
   width: 30px;
-  background: ${({ $player }) =>
+  background-color: ${({ $player }) =>
     $player === 1
       ? "var(--p1-color)"
       : $player === 2
@@ -19,8 +19,8 @@ const Chip = styled.div`
   border: 2px solid black;
   margin: 5px -5px;
   position: relative;
-  opacity: ${({ $faded }) => $faded && ".65"};
-  filter: ${({ $faded }) => $faded && "hue-rotate(5deg)"};
+  opacity: ${({ $faded }) => $faded && ".9"};
+  filter: ${({ $faded }) => $faded && "hue-rotate(15deg)"};
   &::after {
     content: "";
     position: absolute;

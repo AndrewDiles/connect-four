@@ -168,3 +168,16 @@ button:disabled {
 .fadedIfDisabled:disabled {
 	opacity: 0.5;
 }
+
+/* https://stackoverflow.com/questions/68216941/how-to-make-a-css-shimmer-effect-on-image */
+
+.shimmer {
+  mask: linear-gradient(45deg, #000 30%, #0009, #000 70%) right/350% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    mask-position: left
+  }
+}

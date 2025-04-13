@@ -80,7 +80,13 @@ const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
           type="button"
           style={{ marginTop: "var(--border-size)" }}
           onClick={() => {
-            startGame(setGame, { status: "on" });
+						const nextStartingPlayer = Math.random() > 0.5 ? 1 : 2;
+            startGame(setGame, {
+              status: "on",
+              revisingHistory: false,
+              startingPlayer: nextStartingPlayer,
+              activePlayer: nextStartingPlayer,
+            });
           }}
         >
           <img src={restart} alt="restart button" />

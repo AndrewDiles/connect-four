@@ -61,7 +61,7 @@ const useFocusColumn = ({ result, isBotTurn, game }) => {
               oneInFocusAlready = true;
             }
           });
-					console.log(oneInFocusAlready);
+					// console.log(oneInFocusAlready);
 					
           if (oneInFocusAlready) return;
         }

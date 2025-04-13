@@ -9,6 +9,8 @@ const Column = ({
   columnArray,
   onClick,
   disabled,
+	winningCells,
+	columnIndex,
   entireBoardDisabled,
   activePlayer,
 }) => {
@@ -40,13 +42,22 @@ const Column = ({
         !entireBoardDisabled && setIsHovered(false);
       }}
     >
-      {columnArrayToRender.map((player, index) => {
-        const rowNumber = index + 1;
+      {columnArrayToRender.map((player, rowIndex) => {
+				let winner = false;
+				if (winningCells) {
+					const chipPosition = {columnIndex, rowIndex};
+					const matchingCell = winningCells.find(winningPosition => {
+						return winningPosition.columnIndex === chipPosition.columnIndex && winningPosition.rowIndex === chipPosition.rowIndex
+					})
+					if (matchingCell) winner = true;
+				}
+        const rowNumber = rowIndex + 1;
         return (
           <ChipSlot
             key={rowNumber}
             player={player}
-            faded={isHovered && lastZero === index}
+            faded={isHovered && !isTouch && lastZero === rowIndex}
+						winner={winner}
           />
         );
       })}

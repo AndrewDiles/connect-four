@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Column from "./Column";
+import calculateWinningCells from "../../helpers/calculateWinningCells";
 
 const Board = ({
   board,
@@ -10,12 +11,16 @@ const Board = ({
   disabled,
   scale,
 }) => {
+	const winningCells = (result === 1 || result === 2) ? calculateWinningCells(board, result) : null;
+	
   return (
     <Container id="board" className={className} $scale={scale}>
       {board.map((columnArray, index) => {
         return (
           <Column
             key={index}
+						winningCells={winningCells}
+						columnIndex={index}
             columnArray={columnArray}
             activePlayer={activePlayer}
             onClick={() => {
