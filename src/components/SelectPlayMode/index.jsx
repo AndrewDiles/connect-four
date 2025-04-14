@@ -2,32 +2,42 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import human from "../../assets/human.svg";
 import bot from "../../assets/bot.svg";
+import betterBot from "../../assets/betterBot.svg";
 import BackButton from "./BackButton";
 import startGame from "../../helpers/startGame";
 
 const SelectPlayMode = ({ setGame }) => {
-  const [secret, setSecret] = useState(false);
+  const [botVsBotUnlock, setBotVsBotUnlock] = useState(false);
+	const [improvedAi, setImprovedAi] = useState(false);
   const [secretInputInteraction, setSecretInputInteraction] = useState(false);
   const [secretText, setSecretText] = useState("");
 
   useEffect(() => {
     if (secretText.toLowerCase().includes("unlock bots")) {
-      setSecret(true);
+      return setBotVsBotUnlock(true);
+    }
+		if (secretText.toLowerCase().includes("harder bots")) {
+      return setImprovedAi(true);
     }
   }, [secretText]);
 
+	const sharedNewGame = {
+		status: "on",
+		player1: "human",
+    player2: "human",
+		difficultBots: improvedAi,
+	}
+
   return (
-    <Container $secret={secret}>
+    <Container $botVsBotUnlock={botVsBotUnlock}>
       <BackButton setGame={setGame} />
+
       <ModeSelectionButton
         className="plastic-background"
         type="button"
-        $secret={secret}
         onClick={() => {
           startGame(setGame, {
-            status: "on",
-            player1: "human",
-            player2: "human",
+            ...sharedNewGame
           });
         }}
       >
@@ -39,38 +49,35 @@ const SelectPlayMode = ({ setGame }) => {
       <ModeSelectionButton
         className="bamboo-background"
         type="button"
-        $secret={secret}
         onClick={() => {
           startGame(setGame, {
-            status: "on",
-            player1: "human",
+            ...sharedNewGame,
             player2: "bot",
           });
         }}
       >
         <img src={human} alt="human player" />{" "}
-        <img src={bot} alt="computer player" />
+        <img src={improvedAi ? betterBot : bot} alt="computer player" />
         <DiagonalVersus />
       </ModeSelectionButton>
 
-      {secret && (
+      {botVsBotUnlock && (
         <ModeSelectionButton
           className="circuit-board-background"
           type="button"
-          $secret={secret}
           onClick={() => {
             startGame(setGame, {
-              status: "on",
+              ...sharedNewGame,
               player1: "bot",
               player2: "bot",
             });
           }}
         >
-          <img src={bot} alt="computer player" />{" "}
-          <img src={bot} alt="computer player" /> <DiagonalVersus />
+          <img src={improvedAi ? betterBot : bot} alt="computer player" />{" "}
+          <img src={improvedAi ? betterBot : bot} alt="computer player" /> <DiagonalVersus />
         </ModeSelectionButton>
       )}
-      {!secret && (
+      {!botVsBotUnlock && (
         <HiddenLabel
           className="column"
           $secretInputInteraction={secretInputInteraction}
@@ -103,9 +110,9 @@ const Container = styled.section`
   grid-gap: 1rem;
   display: grid;
   margin: 0 auto 1em;
-  grid-template-columns: ${({ $secret }) =>
-    $secret ? "1fr 1fr 1fr" : "1fr 1fr"};
-  max-width: ${({ $secret }) => ($secret ? "900px" : "600px")};
+  grid-template-columns: ${({ $botVsBotUnlock }) =>
+    $botVsBotUnlock ? "1fr 1fr 1fr" : "1fr 1fr"};
+  max-width: ${({ $botVsBotUnlock }) => ($botVsBotUnlock ? "900px" : "600px")};
   padding-bottom: 3rem;
 
   & button:nth-child(4) {
@@ -114,8 +121,8 @@ const Container = styled.section`
 
   @media only screen and (max-width: 700px) {
     & {
-      grid-template-columns: ${({ $secret }) =>
-        $secret ? "1fr 1fr" : "1fr 1fr"};
+      grid-template-columns: ${({ $botVsBotUnlock }) =>
+        $botVsBotUnlock ? "1fr 1fr" : "1fr 1fr"};
     }
     & button:nth-child(4) {
       left: 52%;

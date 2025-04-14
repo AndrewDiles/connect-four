@@ -80,12 +80,8 @@ const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
           type="button"
           style={{ marginTop: "var(--border-size)" }}
           onClick={() => {
-						const nextStartingPlayer = Math.random() > 0.5 ? 1 : 2;
             startGame(setGame, {
-              status: "on",
-              revisingHistory: false,
-              startingPlayer: nextStartingPlayer,
-              activePlayer: nextStartingPlayer,
+              status: "on"
             });
           }}
         >

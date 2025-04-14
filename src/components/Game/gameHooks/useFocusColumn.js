@@ -21,8 +21,6 @@ const useFocusColumn = ({ result, isBotTurn, game }) => {
             indexOfColumnInFocus = index;
           }
         });
-				console.log({indexOfColumnInFocus});
-				
         if (code === "KeyA" || code === "ArrowLeft") {
           if (typeof indexOfColumnInFocus !== "number") {
             focusRandomElementFromList(selectableColumns);

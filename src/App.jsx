@@ -13,10 +13,14 @@ const initialGameState = {
   revisingHistory: false,
   boardIndex: 0,
   boards: [generateInitialBoard()],
+	difficultBots: false,
+	player1: "human",
+  player2: "human",
 };
 
 function App() {
   const [game, setGame] = useState(structuredClone(initialGameState));
+console.log(game);
 
   return (
     <>

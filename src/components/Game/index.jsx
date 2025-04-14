@@ -3,6 +3,7 @@ import PlayerIndicator from "./PlayerIndicator";
 import ExitAndRestartButtons from "./ExitAndRestartButtons";
 import Board from "./Board";
 import History from "./History";
+import SpecialMessage from "./SpecialMessage";
 
 // hooks
 import useBoardScale from "./gameHooks/useBoardScale";
@@ -82,6 +83,8 @@ const Game = ({ game, setGame }) => {
             : "plastic-background"
         }
       />
+			{result === 1 && game.player1 === "human" && game.player2 ==="bot" && !game.difficultBots && <SpecialMessage message='Try "harder bots" for a challenge!'/>}
+			{result === 1 && game.player1 === "human" && game.player2 ==="bot" && game.difficultBots && <SpecialMessage message="Wow, you beat the better ai!"/>}
     </>
   );
 };

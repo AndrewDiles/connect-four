@@ -22,16 +22,11 @@ const BeginGameButton = ({ setGame }) => {
     };
   }, []);
 
-	const nextStartingPlayer = Math.random() > 0.5 ? 1 : 2;
-
   return (
     <StartButton
       onClick={() => {
         startGame(setGame, {
-          status: "select-mode",
-					revisingHistory: false,
-					startingPlayer: nextStartingPlayer,
-          activePlayer: nextStartingPlayer,
+          status: "select-mode"
         });
       }}
     >
