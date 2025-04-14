@@ -17,6 +17,7 @@ const SelectPlayMode = ({ game, setGame }) => {
       return setBotVsBotUnlock(true);
     }
 		if (secretText.toLowerCase().includes("harder bots")) {
+			setSecretText("");
       return setImprovedAi(true);
     }
   }, [secretText]);
