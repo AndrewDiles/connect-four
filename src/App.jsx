@@ -19,10 +19,9 @@ const initialGameState = {
 
 function App() {
   const [game, setGame] = useState(structuredClone(initialGameState));
-
   return (
     <>
-      <Header gameOn={game.status === "on"} />
+      <Header gameOn={game.status === "on"} difficultBots={game.difficultBots}/>
 
       {game.status === "off" && <MainMenu setGame={setGame} />}
 

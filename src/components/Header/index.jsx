@@ -1,9 +1,9 @@
 import { memo } from "react";
 import styled from "styled-components";
 
-const Header = ({ gameOn }) => {
+const Header = ({ gameOn, difficultBots }) => {
   return (
-    <VanishingHeader $gameOn={gameOn}>
+    <VanishingHeader $gameOn={gameOn} $difficultBots={difficultBots}>
       <h1 className="title">
         CONNECT<span>4</span>
       </h1>
@@ -21,5 +21,6 @@ const VanishingHeader = styled.header`
   }
 	& h1 {
 		margin-bottom: ${({$gameOn}) => $gameOn ? "0" : ".5em"};
+		color: ${({$difficultBots})=> $difficultBots && "red"};
 	}
 `;

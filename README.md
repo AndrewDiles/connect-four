@@ -16,7 +16,15 @@ The user will be able to:
 - include sound effect / volume control
 - ✅ landscape responsive design for mobile
 - ✅ easy keyboard navigation (during game)
-- bot difficulty 
+- ✅ bot difficulty (this mode is hidden)
+
+## Hidden Modes
+
+During game mode selection (bots, pvp, etc), there is a hidden `input` at the bottom of the screen.
+
+Enter the code: __harder bots__ to use an improved bot algorithm.
+
+Enter the code: __unlock bots__ to unlock bot vs bot matches.
 
 <br/>
 

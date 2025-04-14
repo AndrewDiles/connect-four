@@ -8,7 +8,6 @@ import startGame from "../../helpers/startGame";
 
 const SelectPlayMode = ({ game, setGame }) => {
   const [botVsBotUnlock, setBotVsBotUnlock] = useState(false);
-	const [improvedAi, setImprovedAi] = useState(game.difficultBots);
   const [secretInputInteraction, setSecretInputInteraction] = useState(false);
   const [secretText, setSecretText] = useState("");
 
@@ -18,7 +17,7 @@ const SelectPlayMode = ({ game, setGame }) => {
     }
 		if (secretText.toLowerCase().includes("harder bots")) {
 			setSecretText("");
-      return setImprovedAi(true);
+			setGame({...game, difficultBots: true})
     }
   }, [secretText]);
 
@@ -26,8 +25,9 @@ const SelectPlayMode = ({ game, setGame }) => {
 		status: "on",
 		player1: "human",
     player2: "human",
-		difficultBots: improvedAi,
 	}
+
+	const botSrc = game.difficultBots ? betterBot : bot;
 
   return (
     <Container $botVsBotUnlock={botVsBotUnlock}>
@@ -58,7 +58,7 @@ const SelectPlayMode = ({ game, setGame }) => {
         }}
       >
         <img src={human} alt="human player" />{" "}
-        <img src={improvedAi ? betterBot : bot} alt="computer player" />
+        <img src={botSrc} alt="computer player" />
         <DiagonalVersus />
       </ModeSelectionButton>
 
@@ -74,8 +74,8 @@ const SelectPlayMode = ({ game, setGame }) => {
             });
           }}
         >
-          <img src={improvedAi ? betterBot : bot} alt="computer player" />{" "}
-          <img src={improvedAi ? betterBot : bot} alt="computer player" /> <DiagonalVersus />
+          <img src={botSrc} alt="computer player" />{" "}
+          <img src={botSrc} alt="computer player" /> <DiagonalVersus />
         </ModeSelectionButton>
       )}
       {!botVsBotUnlock && (
