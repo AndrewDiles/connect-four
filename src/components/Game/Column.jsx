@@ -34,7 +34,10 @@ const Column = ({
       tabIndex={entireBoardDisabled ? -1 : disabled ? -1 : 0}
       onClick={(ev) => {
 				// document.activeElement?.blur && document.activeElement.blur()
-        if (!entireBoardDisabled) onClick();
+        if (!entireBoardDisabled) {
+					onClick();
+					setIsHovered(false);
+				}
       }}
       onMouseEnter={() => {
         !entireBoardDisabled && setIsHovered(true);

@@ -12,7 +12,6 @@ function is_touch_device4() {
   if (window.matchMedia("(pointer: coarse)").matches) return true;
 
   return (
-    "ontouchstart" in window ||
     navigator.maxTouchPoints > 0 ||
     navigator.msMaxTouchPoints > 0
   );
