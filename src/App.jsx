@@ -1,45 +1,32 @@
 import { useState } from "react";
 import Header from "./components/Header";
-import SelectChipColors from "./components/SelectChipColors";
+import MainMenu from "./components/MainMenu";
 import generateInitialBoard from "./helpers/generateInitialBoard";
-import BeginGameButton from "./components/BeginGameButton";
 import SelectPlayMode from "./components/SelectPlayMode";
 import Game from "./components/Game";
 
 const initialGameState = {
   status: "off", // "off", "select-mode"
-	startingPlayer: null,
+  startingPlayer: null,
   activePlayer: null,
   revisingHistory: false,
   boardIndex: 0,
   boards: [generateInitialBoard()],
-	difficultBots: false,
-	player1: "human",
+  difficultBots: false,
+  player1: "human",
   player2: "human",
 };
 
 function App() {
   const [game, setGame] = useState(structuredClone(initialGameState));
-console.log(game);
 
   return (
     <>
       <Header gameOn={game.status === "on"} />
 
-      {game.status === "off" && (
-        <menu>
-          <SelectChipColors />
-          <BeginGameButton setGame={setGame} />
-          <a
-            href="https://www.unco.edu/hewit/pdf/giant-map/connect-4-instructions.pdf"
-            target="_blank"
-          >
-            RULES
-          </a>
-        </menu>
-      )}
+      {game.status === "off" && <MainMenu setGame={setGame} />}
 
-      {game.status === "select-mode" && <SelectPlayMode setGame={setGame} />}
+      {game.status === "select-mode" && <SelectPlayMode game={game} setGame={setGame} />}
 
       {game.status === "on" && <Game game={game} setGame={setGame} />}
     </>

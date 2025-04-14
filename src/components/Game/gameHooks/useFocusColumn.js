@@ -54,7 +54,6 @@ const useFocusColumn = ({ result, isBotTurn, game }) => {
     if (!result && !isBotTurn && !game.revisingHistory) {
       const selectableColumns = document.querySelectorAll(".selectable-column");
       if (selectableColumns.length > 0) {
-				console.log(document.activeElement)
         if (document.activeElement) {
           let oneInFocusAlready = false;
           selectableColumns.forEach((column) => {

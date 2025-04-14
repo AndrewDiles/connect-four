@@ -7,7 +7,7 @@ const useBotMove = ({game, result, isBotTurn, activeBoard, handleClickColumn}) =
 		useEffect(() => {
 			let timer;
 			if (!result && isBotTurn && activeBoard) {
-				const nextBotMove = calculateNextMove(activeBoard, game.activePlayer);
+				const nextBotMove = calculateNextMove(activeBoard, game.activePlayer, game.difficultBots);
 				if (typeof nextBotMove === "number")
 					timer = setTimeout(() => {
 						handleClickColumn(nextBotMove);

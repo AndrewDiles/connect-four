@@ -6,9 +6,9 @@ import betterBot from "../../assets/betterBot.svg";
 import BackButton from "./BackButton";
 import startGame from "../../helpers/startGame";
 
-const SelectPlayMode = ({ setGame }) => {
+const SelectPlayMode = ({ game, setGame }) => {
   const [botVsBotUnlock, setBotVsBotUnlock] = useState(false);
-	const [improvedAi, setImprovedAi] = useState(false);
+	const [improvedAi, setImprovedAi] = useState(game.difficultBots);
   const [secretInputInteraction, setSecretInputInteraction] = useState(false);
   const [secretText, setSecretText] = useState("");
 

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styled from "styled-components";
 
 const Header = ({ gameOn }) => {
@@ -10,7 +11,7 @@ const Header = ({ gameOn }) => {
   );
 };
 
-export default Header;
+export default memo(Header);
 
 const VanishingHeader = styled.header`
   @media only screen and (orientation: landscape) and (max-height: 500px) {

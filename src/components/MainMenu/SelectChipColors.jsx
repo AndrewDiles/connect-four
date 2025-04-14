@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import ChipSlot from "../shared/ChipSlot";
 import SingleChipSelector from "./SingleChipSelector";
 
 const playerNumbers = [1, 2];
