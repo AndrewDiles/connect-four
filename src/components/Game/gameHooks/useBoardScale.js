@@ -11,7 +11,7 @@ const useBoardScale = () => {
 			const windowWidth = window.innerWidth;
 			let heightModifier = 0;
 			const header = document.querySelector("header")
-			if ( header && header.checkVisibility({ checkDisplayNone: true })) {
+			if ( header && header.checkVisibility && header.checkVisibility({ checkDisplayNone: true })) {
 				const possibleFourInTitle = document.querySelector("span");
 				if (possibleFourInTitle) {
 					heightModifier = possibleFourInTitle.offsetHeight;

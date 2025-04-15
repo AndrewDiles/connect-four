@@ -22,7 +22,13 @@ const Column = ({
     }
   }, [entireBoardDisabled]);
   const columnArrayToRender = [...columnArray];
-  const lastZero = columnArrayToRender.findLastIndex((chip) => chip === 0);
+	let lastZero = -1;
+	columnArrayToRender.forEach((chip, index) => {
+		if (chip === 0) {
+			lastZero = index
+		}
+	})
+  // const lastZero = columnArrayToRender.findLastIndex((chip) => chip === 0);
   if (isHovered && lastZero > -1) {
     columnArrayToRender[lastZero] = activePlayer;
   }
