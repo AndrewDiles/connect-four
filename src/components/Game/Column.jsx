@@ -78,6 +78,7 @@ const Container = styled.button`
   background-color: transparent;
   outline-offset: -2px;
   cursor: pointer;
+	scale: 1;
   &:focus,
   &:focus-visible,
   &:focus-within {
@@ -101,18 +102,24 @@ const Container = styled.button`
   }
   &:focus::before {
     z-index: 5;
-    content: "⬇";
+    content: " ⬇ ";
     position: absolute;
     font-size: 20px;
     top: -9%;
-    left: 11%;
+    left: -8%;
     color: white;
     font-weight: bold;
     letter-spacing: calc(var(--border-size) * 0.5);
     -webkit-text-stroke: var(--border-size) black;
     paint-order: stroke fill;
 		visibility: ${isTouch && "hidden"};
+		padding: 0 20%;
   }
+	@-moz-document url-prefix() {
+	&:focus::before {
+    left: 11%;
+  }
+}
   &:focus:active::before {
     -webkit-text-stroke: var(--border-size) var(--active-color);
   }

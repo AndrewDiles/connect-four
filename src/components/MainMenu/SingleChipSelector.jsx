@@ -27,17 +27,20 @@ const ANIMATION_TIME = 1250;
 const root = document.querySelector(":root");
 
 function getCSSVariableValue(varName) {
-  var styles = getComputedStyle(root);
+  const styles = getComputedStyle(root);
   return styles.getPropertyValue(varName);
 }
 
 const SingleChipSelector = ({ playerNumber }) => {
   const colorInputRef = useRef(null);
 	const [booped, setBooped] = useState(false);
+	const cSSVarName = `--p${playerNumber}-color`;
+	const [color, setColor] = useState(getCSSVariableValue(cSSVarName));
 
   useEffect(() => {
     if (!colorInputRef.current) return;
     colorInputRef.current.value = getCSSVariableValue(cSSVarName);
+		setBooped(true);
   }, []);
 
 	useEffect(()=>{
@@ -48,11 +51,11 @@ const SingleChipSelector = ({ playerNumber }) => {
 			}, ANIMATION_TIME)
 		}
 		return () => {
-			clearTimeout(booped)
+			clearTimeout(timer)
 		}
 	}, [booped]);
 
-  const cSSVarName = `--p${playerNumber}-color`;
+  
   const name = `player ${playerNumber} color`;
 
 	const boopIt = ()=>{
@@ -60,7 +63,7 @@ const SingleChipSelector = ({ playerNumber }) => {
 	}
 
   return (
-    <Container key={playerNumber} className="column" $booped={booped}>
+    <Container key={playerNumber} className="column" $booped={booped} $color={color}>
       <label htmlFor={name}>PLAYER {playerNumber}</label>
       <div className="row" >
         <ChipSlot player={playerNumber}/>
@@ -72,6 +75,7 @@ const SingleChipSelector = ({ playerNumber }) => {
           ref={colorInputRef}
           onChange={({ target: { value } }) => {
             root.style.setProperty(cSSVarName, value);
+						setColor(value);
           }}
         ></input>
       </div>
@@ -95,5 +99,8 @@ justify-self: center;
 	animation-duration: ${ANIMATION_TIME}ms;
 	animation-iteration-count: infinite;
 	transform-origin: center;
+}
+& >div input[type="color"]::-webkit-color-swatch {
+	background-color: ${({$color})=>$color} !important;
 }
 `

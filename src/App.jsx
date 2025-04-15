@@ -6,7 +6,7 @@ import SelectPlayMode from "./components/SelectPlayMode";
 import Game from "./components/Game";
 
 const initialGameState = {
-  status: "off", // "off", "select-mode"
+  status: "off", // "off", "select-mode", "on"
   startingPlayer: null,
   activePlayer: null,
   revisingHistory: false,
@@ -17,15 +17,31 @@ const initialGameState = {
   player2: "human",
 };
 
+let structuredCloneExists = true;
+try {
+  structuredClone(initialGameState);
+} catch {
+  structuredCloneExists = false;
+}
+
 function App() {
-  const [game, setGame] = useState(structuredClone(initialGameState));
+  const [game, setGame] = useState(
+    structuredCloneExists
+      ? structuredClone(initialGameState)
+      : JSON.parse(JSON.stringify(initialGameState))
+  );
   return (
     <>
-      <Header gameOn={game.status === "on"} difficultBots={game.difficultBots}/>
+      <Header
+        gameOn={game.status === "on"}
+        difficultBots={game.difficultBots}
+      />
 
       {game.status === "off" && <MainMenu setGame={setGame} />}
 
-      {game.status === "select-mode" && <SelectPlayMode game={game} setGame={setGame} />}
+      {game.status === "select-mode" && (
+        <SelectPlayMode game={game} setGame={setGame} />
+      )}
 
       {game.status === "on" && <Game game={game} setGame={setGame} />}
     </>

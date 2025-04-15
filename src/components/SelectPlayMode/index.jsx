@@ -115,7 +115,7 @@ const Container = styled.section`
     $botVsBotUnlock ? "1fr 1fr 1fr" : "1fr 1fr"};
   max-width: ${({ $botVsBotUnlock }) => ($botVsBotUnlock ? "900px" : "600px")};
   padding-bottom: 3rem;
-
+	justify-items: center;
   & button:nth-child(4) {
     transition: all 0.3s ease-in-out, left 0.01s linear;
   }
@@ -172,6 +172,7 @@ const ModeSelectionButton = styled.button`
 const HiddenLabel = styled.label`
   grid-column: 1 / 2;
   justify-self: center;
+	-webkit-justify-self: center;
   position: absolute;
   bottom: 0.5em;
   color: ${({ $secretInputInteraction }) =>
