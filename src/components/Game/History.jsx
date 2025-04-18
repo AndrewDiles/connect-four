@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
+import useSound from "use-sound";
 import styled from "styled-components";
 import hourglass from "../../assets/hourglass.svg";
 import pause from "../../assets/pause.svg";
 import play from "../../assets/play.svg";
 import stepBack from "../../assets/stepBack.svg";
 import stepForward from "../../assets/stepForward.svg";
+import pauseSound from "../../assets/sounds/pause.mp3";
+import historyChangeSound from "../../assets/sounds/historyChange.mp3";
 
 const History = ({ game, setGame }) => {
   const [showHourGlass, setShowHourGlass] = useState(false);
   const [width, setWidth] = useState(0);
+	const [playPauseSound] = useSound(pauseSound);
+	const [playHistoryChangeSound] = useSound(historyChangeSound);
 
 	useEffect(()=>{
 		if (game.revisingHistory && width === 0) {
@@ -33,6 +38,7 @@ const History = ({ game, setGame }) => {
       <button
         type="button"
         onClick={() => {
+					!game.mute && playPauseSound()
           setGame((currentGame) => {
             return {
               ...currentGame,
@@ -54,6 +60,7 @@ const History = ({ game, setGame }) => {
           type="button"
           disabled={game.boardIndex === 0}
           onClick={() => {
+						!game.mute && playHistoryChangeSound();
             setGame((currentGame) => {
               return {
                 ...currentGame,
@@ -70,6 +77,7 @@ const History = ({ game, setGame }) => {
           type="button"
           disabled={game.boardIndex >= game.boards.length - 1}
           onClick={() => {
+						!game.mute && playHistoryChangeSound();
             setGame((currentGame) => {
               return {
                 ...currentGame,

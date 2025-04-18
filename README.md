@@ -13,7 +13,7 @@ The user will be able to:
 
 ## Stretch Goals
 
-- include sound effect / volume control
+- ✅ include sound effect / mute control
 - ✅ landscape responsive design for mobile
 - ✅ easy keyboard navigation (during game)
 - ✅ bot difficulty (this mode is hidden)
@@ -25,6 +25,12 @@ During game mode selection (bots, pvp, etc), there is a hidden `input` at the bo
 Enter the code: __harder bots__ to use an improved bot algorithm.
 
 Enter the code: __unlock bots__ to unlock bot vs bot matches.
+
+## Credit Where it is Due
+
+Special thank you to Joshua Comeau for [use-sound](https://www.npmjs.com/package/use-sound) and his guidance over the years.
+
+Sound effects found on [https://cdn.freesound.org/](https://cdn.freesound.org/)
 
 <br/>
 

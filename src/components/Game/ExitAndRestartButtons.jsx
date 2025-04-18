@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
+import useSound from "use-sound";
 import styled from "styled-components";
 import startGame from "../../helpers/startGame";
 import exit from "../../assets/exit.svg";
 import back from "../../assets/back.svg";
 import restart from "../../assets/restart.svg";
+import forwardSound from "../../assets/sounds/forward.mp3";
+import backSound from "../../assets/sounds/back.mp3";
+import historyChangeSound from "../../assets/sounds/historyChange.mp3";
 
-const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
+const ExitAndRestartButtons = ({ game, revisingHistory, gameOver, setGame }) => {
   const [revealConfirm, setRevealConfirm] = useState(false);
+	const [playStartSound] = useSound(forwardSound);
+	const [playBackSound] = useSound(backSound);
+	const [playHistoryChangeSound] = useSound(historyChangeSound);
 
   useEffect(() => {
     setRevealConfirm(false);
@@ -39,6 +46,7 @@ const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
                 type="button"
                 style={{ marginRight: "var(--border-size)" }}
                 onClick={() => {
+									!game.mute && playBackSound();
                   startGame(setGame, { status: "select-mode" });
                 }}
               >
@@ -55,6 +63,7 @@ const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
                   ...currentGame,
                   revisingHistory: false,
                 }));
+								!game.mute && playHistoryChangeSound();
                 setRevealConfirm(true);
               }}
             >
@@ -67,6 +76,7 @@ const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
           <button
             type="button"
             onClick={() => {
+							!game.mute && playBackSound();
               startGame(setGame, { status: "select-mode" });
             }}
           >
@@ -80,6 +90,7 @@ const ExitAndRestartButtons = ({ revisingHistory, gameOver, setGame }) => {
           type="button"
           style={{ marginTop: "var(--border-size)" }}
           onClick={() => {
+						!game.mute && playStartSound()
             startGame(setGame, {
               status: "on"
             });

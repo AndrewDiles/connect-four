@@ -5,11 +5,11 @@ const playerNumbers = [1, 2];
 
 const root = document.querySelector(":root");
 
-const SelectChipColors = () => {
+const SelectChipColors = ({game}) => {
   return (
     <Container>
       {playerNumbers.map((playerNumber) => (
-        <SingleChipSelector key={playerNumber} playerNumber={playerNumber} />
+        <SingleChipSelector key={playerNumber} game={game} playerNumber={playerNumber} />
       ))}
     </Container>
   );

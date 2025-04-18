@@ -1,11 +1,15 @@
+import useSound from "use-sound";
 import styled from "styled-components";
 import startGame from "../../helpers/startGame";
 import back from "../../assets/back.svg";
+import backSound from "../../assets/sounds/back.mp3";
 
-const BackButton = ({ setGame }) => {
+const BackButton = ({ game, setGame }) => {
+  const [playBackSound] = useSound(backSound);
   return (
     <StyledButton
       onClick={() => {
+        !game.mute && playBackSound();
         startGame(setGame, { status: "off" });
       }}
     >
