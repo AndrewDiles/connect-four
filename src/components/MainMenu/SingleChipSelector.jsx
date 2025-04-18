@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChipSlot from "../shared/ChipSlot";
-import { keyframes } from 'styled-components';
+import { keyframes } from "styled-components";
+import useSound from "use-sound";
+import chipSound from "../../assets/sounds/chip.mp3";
 
 const bounceAnimation = keyframes`
  0% { top: 0; transform: scaleY(1); }
@@ -20,7 +22,7 @@ const bounceAnimation = keyframes`
  98% { top:-2px; transform: scaleY(1); }
  99% { top:0px; transform: scaleY(1); }
  100% { top:0px; transform: scaleY(1); }
-`
+`;
 
 const ANIMATION_TIME = 1250;
 
@@ -31,51 +33,59 @@ function getCSSVariableValue(varName) {
   return styles.getPropertyValue(varName);
 }
 
-const SingleChipSelector = ({ playerNumber }) => {
+const SingleChipSelector = ({ game, playerNumber }) => {
   const colorInputRef = useRef(null);
-	const [booped, setBooped] = useState(false);
-	const cSSVarName = `--p${playerNumber}-color`;
-	const [color, setColor] = useState(getCSSVariableValue(cSSVarName));
+  const [booped, setBooped] = useState(false);
+  const cSSVarName = `--p${playerNumber}-color`;
+  const [color, setColor] = useState(getCSSVariableValue(cSSVarName));
+  const [playChipSound] = useSound(chipSound);
 
   useEffect(() => {
     if (!colorInputRef.current) return;
     colorInputRef.current.value = getCSSVariableValue(cSSVarName);
-		setBooped(true);
+    setBooped(true);
   }, []);
 
-	useEffect(()=>{
-		let timer;
-		if (booped) {
-			timer = setTimeout(()=>{
-				setBooped(false)
-			}, ANIMATION_TIME)
-		}
-		return () => {
-			clearTimeout(timer)
-		}
-	}, [booped]);
+  useEffect(() => {
+    let timer;
+    if (booped) {
+      timer = setTimeout(() => {
+        setBooped(false);
+      }, ANIMATION_TIME);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [booped]);
 
-  
   const name = `player ${playerNumber} color`;
 
-	const boopIt = ()=>{
-		if (!booped) setBooped(true);
-	}
+  const boopIt = () => {
+    if (!booped) setBooped(true);
+  };
 
   return (
-    <Container key={playerNumber} className="column" $booped={booped} $color={color}>
+    <Container
+      key={playerNumber}
+      className="column"
+      $booped={booped}
+      $color={color}
+    >
       <label htmlFor={name}>PLAYER {playerNumber}</label>
-      <div className="row" >
-        <ChipSlot player={playerNumber}/>
+      <div className="row">
+        <ChipSlot player={playerNumber} />
         <input
           name={name}
-					onClick={boopIt}
-					onMouseEnter={boopIt}
+          onClick={() => {
+            !game.mute && playChipSound();
+            boopIt();
+          }}
+          onMouseEnter={boopIt}
           type="color"
           ref={colorInputRef}
           onChange={({ target: { value } }) => {
             root.style.setProperty(cSSVarName, value);
-						setColor(value);
+            setColor(value);
           }}
         ></input>
       </div>
@@ -86,21 +96,21 @@ const SingleChipSelector = ({ playerNumber }) => {
 export default SingleChipSelector;
 
 const Container = styled.div`
-padding: 0 1em;
-width: fit-content;
-justify-self: center;
-& input {
-	margin-left: 1rem;
-	min-height: 50px;
-	min-width: 50px;
-}
-& >div >div {
-	animation-name: ${({$booped}) => $booped ? bounceAnimation : "none"};
-	animation-duration: ${ANIMATION_TIME}ms;
-	animation-iteration-count: infinite;
-	transform-origin: center;
-}
-& >div input[type="color"]::-webkit-color-swatch {
-	background-color: ${({$color})=>$color} !important;
-}
-`
+  padding: 0 1em;
+  width: fit-content;
+  justify-self: center;
+  & input {
+    margin-left: 1rem;
+    min-height: 50px;
+    min-width: 50px;
+  }
+  & > div > div {
+    animation-name: ${({ $booped }) => ($booped ? bounceAnimation : "none")};
+    animation-duration: ${ANIMATION_TIME}ms;
+    animation-iteration-count: infinite;
+    transform-origin: center;
+  }
+  & > div input[type="color"]::-webkit-color-swatch {
+    background-color: ${({ $color }) => $color} !important;
+  }
+`;

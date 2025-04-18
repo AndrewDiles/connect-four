@@ -4,6 +4,7 @@ import MainMenu from "./components/MainMenu";
 import generateInitialBoard from "./helpers/generateInitialBoard";
 import SelectPlayMode from "./components/SelectPlayMode";
 import Game from "./components/Game";
+import MuteFooter from "./components/MuteFooter";
 
 const initialGameState = {
   status: "off", // "off", "select-mode", "on"
@@ -15,6 +16,7 @@ const initialGameState = {
   difficultBots: false,
   player1: "human",
   player2: "human",
+	mute: true,
 };
 
 let structuredCloneExists = true;
@@ -37,13 +39,15 @@ function App() {
         difficultBots={game.difficultBots}
       />
 
-      {game.status === "off" && <MainMenu setGame={setGame} />}
+      {game.status === "off" && <MainMenu game={game} setGame={setGame} />}
 
       {game.status === "select-mode" && (
         <SelectPlayMode game={game} setGame={setGame} />
       )}
 
       {game.status === "on" && <Game game={game} setGame={setGame} />}
+
+			<MuteFooter game={game} setGame={setGame}/>
     </>
   );
 }

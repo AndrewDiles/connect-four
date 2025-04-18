@@ -1,25 +1,34 @@
 import { useState, useEffect } from "react";
+import useSound from "use-sound";
 import styled from "styled-components";
 import human from "../../assets/human.svg";
 import bot from "../../assets/bot.svg";
 import betterBot from "../../assets/betterBot.svg";
 import BackButton from "./BackButton";
 import startGame from "../../helpers/startGame";
+import forwardSound from "../../assets/sounds/forward.mp3";
+import bonusSound from "../../assets/sounds/bonus.mp3";
 
 const SelectPlayMode = ({ game, setGame }) => {
   const [botVsBotUnlock, setBotVsBotUnlock] = useState(false);
   const [secretInputInteraction, setSecretInputInteraction] = useState(false);
   const [secretText, setSecretText] = useState("");
+	const [playStartSound] = useSound(forwardSound);
+	const [playBonusSound] = useSound(bonusSound);
 
   useEffect(() => {
     if (secretText.toLowerCase().includes("unlock bots")) {
+			!game.mute && playBonusSound()
       return setBotVsBotUnlock(true);
     }
 		if (secretText.toLowerCase().includes("harder bots")) {
 			setSecretText("");
-			setGame({...game, difficultBots: true})
+			if (!game.difficultBots) {
+				!game.mute && playBonusSound()
+				setGame({...game, difficultBots: true})
+			}
     }
-  }, [secretText]);
+  }, [game.mute, secretText]);
 
 	const sharedNewGame = {
 		status: "on",
@@ -31,12 +40,13 @@ const SelectPlayMode = ({ game, setGame }) => {
 
   return (
     <Container $botVsBotUnlock={botVsBotUnlock}>
-      <BackButton setGame={setGame} />
+      <BackButton game={game} setGame={setGame} />
 
       <ModeSelectionButton
         className="plastic-background"
         type="button"
         onClick={() => {
+					!game.mute && playStartSound();
           startGame(setGame, {
             ...sharedNewGame
           });
@@ -51,6 +61,7 @@ const SelectPlayMode = ({ game, setGame }) => {
         className="bamboo-background"
         type="button"
         onClick={() => {
+					!game.mute && playStartSound();
           startGame(setGame, {
             ...sharedNewGame,
             player2: "bot",
@@ -67,6 +78,7 @@ const SelectPlayMode = ({ game, setGame }) => {
           className="circuit-board-background"
           type="button"
           onClick={() => {
+						!game.mute && playStartSound();
             startGame(setGame, {
               ...sharedNewGame,
               player1: "bot",
