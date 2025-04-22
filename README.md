@@ -2,6 +2,8 @@
 
 As implied, this repository houses a connect-four game.
 
+![gif of a game versus a bot](./sample_game.gif)
+
 ## MVP
 
 The user will be able to:
@@ -13,7 +15,7 @@ The user will be able to:
 
 ## Stretch Goals
 
-- ✅ include sound effect / mute control
+- ✅ include sound effects / mute control
 - ✅ landscape responsive design for mobile
 - ✅ easy keyboard navigation (during game)
 - ✅ bot difficulty (this mode is hidden)
