@@ -46,7 +46,7 @@ const useFocusColumn = ({ result, isBotTurn, game }) => {
     };
     window.addEventListener("keydown", handleKeyboardPress);
     return () => {
-      window.addEventListener("keydown", handleKeyboardPress);
+      window.removeEventListener("keydown", handleKeyboardPress);
     };
   }, []);
 
